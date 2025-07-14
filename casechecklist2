@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QA Checklist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      color: #000000;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #00807b;
+    }
+
+    h2 {
+      color: #00807b;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 30px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      font-size: 1.15em;
+    }
+
+    li {
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+    }
+
+    input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      margin-right: 15px;
+      accent-color: #00807b;
+      cursor: pointer;
+    }
+
+    .final {
+      margin-top: 40px;
+      color: #00807b;
+      font-size: 1.3em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🛡️ Avoid QA Markdowns!</h2>
+    <p>Before exiting the case, confirm the following:</p>
+    <ul>
+      <li><input type="checkbox"> A servicing communication was created for any necessary follow-ups.</li>
+      <li><input type="checkbox"> The case was reassigned to the correct queue based on Lending Partner and product.</li>
+    </ul>
+    <p class="final">✅ Checks complete — you're good to close! 🚀</p>
+  </div>
+</body>
+</html>
