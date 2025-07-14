@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>QA Case Checklist</title>
+  <meta charset="UTF-8" />
+  <title>Avoid QA Markdowns</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #ffffff;
-      font-family: 'Montserrat', sans-serif;
-      color: #000000;
+    html, body {
       margin: 0;
-      padding: 20px;
-      box-sizing: border-box;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      height: 100%;
     }
 
     .container {
@@ -20,6 +20,7 @@
       padding: 20px 30px;
       border-radius: 12px;
       box-shadow: 0 0 20px #00807b;
+      box-sizing: border-box;
     }
 
     h2 {
@@ -50,18 +51,55 @@
     }
 
     input[type="checkbox"] {
-      width: 20px;
-      height: 20px;
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      min-height: 24px;
       margin-right: 15px;
-      accent-color: #00807b;
-      flex-shrink: 0;
+      cursor: pointer;
+      appearance: none;
+      border: 2px solid #00807b;
+      border-radius: 4px;
+      position: relative;
+      transition: background-color 0.3s ease;
     }
 
-    .final {
+    input[type="checkbox"]::before {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 7px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg) scale(0);
+      opacity: 0;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    input[type="checkbox"]:checked {
+      background-color: #00807b;
+    }
+
+    input[type="checkbox"]:checked::before {
+      transform: rotate(45deg) scale(1);
+      opacity: 1;
+    }
+
+    .final-message {
       margin-top: 30px;
       color: #00807b;
-      font-size: 1.2em;
+      font-size: 1.3em;
       text-align: center;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .final-message.show {
+      display: block;
+      opacity: 1;
     }
   </style>
 </head>
@@ -69,15 +107,25 @@
   <div class="container">
     <h2>🛡️ Avoid QA Markdowns!</h2>
     <p class="description">Before exiting the case, confirm the following:</p>
-    <ul>
-      <li><input type="checkbox"> The borrower’s email address matches the one on the attached Funding Agreement.</li>
-      <li><input type="checkbox"> The attached Funding Agreement corresponds to the correct loan (if multiple loans exist).</li>
-      <li><input type="checkbox"> You’re responding from the appropriate email address for the lending program.</li>
-      <li><input type="checkbox"> The correct creditor signature is included.</li>
-      <li><input type="checkbox"> All borrower questions have been clearly addressed.</li>
-      <li><input type="checkbox"> All numerical details (e.g., payment amounts, due dates) are accurate.</li>
+    <ul id="qa-checklist">
+      <li><input type="checkbox"> Created a servicing communication for any necessary follow-ups.</li>
+      <li><input type="checkbox"> Assigned the case back to the correct queue.</li>
     </ul>
-    <p class="final">✅ Checks complete — you're good to close! 🚀</p>
+    <p class="final-message" id="qaFinalMessage">✅ You're all set — QA compliance confirmed! ✨</p>
   </div>
+
+  <script>
+    const qaCheckboxes = document.querySelectorAll('#qa-checklist input[type="checkbox"]');
+    const qaFinalMessage = document.getElementById('qaFinalMessage');
+
+    function checkAllQA() {
+      const allChecked = Array.from(qaCheckboxes).every(checkbox => checkbox.checked);
+      qaFinalMessage.classList.toggle('show', allChecked);
+    }
+
+    qaCheckboxes.forEach(checkbox => {
+      checkbox.addEventListener('change', checkAllQA);
+    });
+  </script>
 </body>
 </html>
